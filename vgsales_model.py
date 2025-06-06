@@ -8,19 +8,20 @@ model = joblib.load("vgsales_model.pkl")
 # Title
 st.title("🎮 Video Game Sales Predictor")
 
-# User Inputs
-platform = st.selectbox("Platform", ['Wii', 'NES', 'PS4', 'GB', 'DS'])  # Add more
-genre = st.selectbox("Genre", ['Sports', 'Platform', 'Racing', 'Action'])  # Add more
+# User Inputs for features model was trained on
 year = st.number_input("Year of Release", min_value=1980, max_value=2025, value=2010)
+na_sales = st.number_input("NA Sales (in millions)", min_value=0.0, value=1.0)
+eu_sales = st.number_input("EU Sales (in millions)", min_value=0.0, value=1.0)
+jp_sales = st.number_input("JP Sales (in millions)", min_value=0.0, value=0.5)
+other_sales = st.number_input("Other Sales (in millions)", min_value=0.0, value=0.2)
 
-# Encode Inputs (example — use one-hot or manual mapping as needed)
-platform_map = {'Wii': 1, 'NES': 2, 'PS4': 3, 'GB': 4, 'DS': 5}
-genre_map = {'Sports': 1, 'Platform': 2, 'Racing': 3, 'Action': 4}
-
+# Create input dataframe
 X_input = pd.DataFrame([{
-    "Platform": platform_map.get(platform, 0),
-    "Genre": genre_map.get(genre, 0),
-    "Year": year
+    "Year": year,
+    "NA_Sales": na_sales,
+    "EU_Sales": eu_sales,
+    "JP_Sales": jp_sales,
+    "Other_Sales": other_sales
 }])
 
 # Predict
