@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # Load model
-model = joblib.load("vgsales_model.pkl")
+model = joblib.load("vgsales_model_compressed.pkl")
 
 # Title
 st.title("🎮 Video Game Sales Predictor")
